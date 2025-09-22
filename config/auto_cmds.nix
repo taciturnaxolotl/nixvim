@@ -4,6 +4,7 @@
     vim_enter = { };
     indentscope = { };
     restore_cursor = { };
+    school_formatting = { };
   };
 
   autoCmd = [
@@ -67,6 +68,28 @@
             then
               vim.cmd "normal! g`\""
             end
+          end
+        '';
+      };
+    }
+    {
+      group = "school_formatting";
+      event = [
+        "BufRead"
+        "BufNewFile"
+      ];
+      pattern = [
+        "*/code/school/*"
+        "*/code/school/**/*"
+      ];
+      callback = {
+        __raw = ''
+          function()
+            vim.opt_local.tabstop = 8
+            vim.opt_local.softtabstop = 0
+            vim.opt_local.shiftwidth = 3
+            vim.opt_local.smarttab = true;
+            vim.opt_local.expandtab = true
           end
         '';
       };
